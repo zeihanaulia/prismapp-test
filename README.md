@@ -77,10 +77,37 @@ Dengan ini kita bisa membataskan konteks dalam 3 use case yaitu:
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
     ```
 5. clone this project from 
-6. open terminal and goto project path 
-7. cd /cmd/chatd
-8. run go main.go or go build -o chatd && ./chatd
-9. go to browser open localhost:8080
-10. or goto postman
+6. open 2 terminal 
+7. in first terminal goto project path:
+    ```
+    cd /cmd/realtimed
+    ```
+8. then run the project
+    ```
+      go run main.go
+      
+      or 
+      
+      go build -o realtimed && ./realtimed
+    ```
 
-![Alt https://imgur.com/OyU763Z]( https://i.imgur.com/OyU763Z.gif)
+9. in second terminal go to project path
+    ```
+       cd /cmd/chatd
+    ```
+
+10. make sure the `realtimed` is runnig in port :7070 then run the chatd project
+    ```
+      go run main.go
+      
+      or 
+      
+      go build -o chatd && ./chatd
+    ```
+
+11. go to browser open localhost:8080 
+12. or goto postman  to send message or retrieve all previous message
+
+Example in Gif
+
+https://i.imgur.com/OyU763Z.gif

@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 
+	gateway "prismapp-test/src/websocket/gateways"
+
 	"github.com/gorilla/websocket"
 )
 
@@ -16,15 +18,19 @@ type room struct {
 	leave chan *client
 	// clients dalam map / menahan seluruh client yang ada didalam ruangan
 	clients map[*client]bool
+
+	//gateway to database
+	roomGateway gateway.Room
 }
 
 // NewRoom initialize access object
-func NewRoom() *room {
+func NewRoom(roomGateway gateway.Room) *room {
 	return &room{
-		forward: make(chan []byte),
-		join:    make(chan *client),
-		leave:   make(chan *client),
-		clients: make(map[*client]bool),
+		forward:     make(chan []byte),
+		join:        make(chan *client),
+		leave:       make(chan *client),
+		clients:     make(map[*client]bool),
+		roomGateway: roomGateway,
 	}
 }
 

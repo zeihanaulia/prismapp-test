@@ -4,6 +4,8 @@ import (
 	"log"
 
 	"github.com/gorilla/websocket"
+
+	entities "prismapp-test/src/websocket/entities"
 )
 
 // client represents a single chatting user.
@@ -31,6 +33,15 @@ func (c *client) read() {
 		if err != nil {
 			return
 		}
+
+		room := entities.Room{}
+		room.Message = string(msg)
+
+		err = c.room.roomGateway.Save(room)
+		if err != nil {
+			return
+		}
+
 		log.Println("recieve: ", string(msg))
 		c.room.forward <- msg
 	}

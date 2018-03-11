@@ -62,6 +62,33 @@ Dengan ini kita bisa membataskan konteks dalam 3 use case yaitu:
 3. Realtime
     * Websocket
 
+## Folder structure
+
+```
+    - cmd                   = folder execute
+        - chatd             = berisi file index untuk chat yang satu arah - REST
+        - realtimed         = berisi file index untuk realtime - websocket
+    - doc                   = dokumentasi Architecture Decision Record (ADR)
+        - decision          = seluruh keputusan dan alasan mengenai architecture dicatat
+    - docker                = folder untuk docker file dan settingnya
+        - mariadb           = docker filde dan setting untuk mariadb
+    - src                   = folder applikasi
+        - chat              = applikasi chat satu arah - REST
+            - entities      = data dari domain bisnis
+            - gateway       = gateway ke utility semisal gateway untuk ke database
+            - handlers      = handler applikasi semacam controller atau tempat menangani request
+            - server        = run server applikasi
+            - usecase       = folder seluruh usecase
+                - retrieve  = usecase retrieve all previous message
+                - send      = usecase send new message
+            - utility       = folder detail / alat pendukung apllikasi seperti database
+                - mysql     = berisi kode untuk integrasi ke mysql
+                - websocket = berisi kode untuk integrasi ke websocket
+        - websocket         = applikasi dua arah
+            - ...
+    - views                 = folder yang berisi html
+```
+
 ## How to running
 
 1. Install go language
@@ -75,38 +102,46 @@ Dengan ini kita bisa membataskan konteks dalam 3 use case yaitu:
             `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
             PRIMARY KEY (`id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+        // file dump ada di folder docker/mariadb/docker-entrypoint-initdb.d
     ```
 5. clone this project from 
 6. open 2 terminal 
 7. in first terminal goto project path:
-    ```
+    ```bash
     cd /cmd/realtimed
     ```
 8. then run the project
-    ```
+    ```bash
       go run main.go
-      
-      or 
-      
+      or
       go build -o realtimed && ./realtimed
     ```
 
 9. in second terminal go to project path
-    ```
+    ```bash
        cd /cmd/chatd
     ```
 
 10. make sure the `realtimed` is runnig in port :7070 then run the chatd project
-    ```
+    ```bash
       go run main.go
-      
-      or 
-      
+      or
       go build -o chatd && ./chatd
     ```
 
 11. go to browser open localhost:8080 
 12. or goto postman  to send message or retrieve all previous message
+13. or with curl
+
+```bash
+    // send message
+    curl -X POST http://localhost:8080/chats -F 'message=test test'
+
+    // retrieve all previous message
+    curl -X GET  http://localhost:8080/chats
+
+```
 
 Example in Gif
 

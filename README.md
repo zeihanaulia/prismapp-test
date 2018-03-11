@@ -113,9 +113,10 @@ Dengan ini kita bisa membataskan konteks dalam 3 use case yaitu:
     ```
 8. then run the project
     ```bash
-      go run main.go
-      or
-      go build -o realtimed && ./realtimed
+        go get -v 
+        go run main.go
+        or
+        go build -o realtimed && ./realtimed
     ```
 
 9. in second terminal go to project path
@@ -125,9 +126,10 @@ Dengan ini kita bisa membataskan konteks dalam 3 use case yaitu:
 
 10. make sure the `realtimed` is runnig in port :7070 then run the chatd project
     ```bash
-      go run main.go
-      or
-      go build -o chatd && ./chatd
+        go get -v
+        go run main.go
+        or
+        go build -o chatd && ./chatd
     ```
 
 11. go to browser open localhost:8080 

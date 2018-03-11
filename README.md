@@ -83,4 +83,6 @@ Dengan ini kita bisa membataskan konteks dalam 3 use case yaitu:
 9. go to browser open localhost:8080
 10. or goto postman
 
-![Alt https://imgur.com/OyU763Z]( https://i.imgur.com/OyU763Z.gif)
+Example in Gif
+
+https://i.imgur.com/OyU763Z.gif

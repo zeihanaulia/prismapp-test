@@ -5,7 +5,6 @@ import (
 	"net/http"
 	retrieveUseCase "prismapp-test/src/chat/usecase/retrieve"
 	sendUseCase "prismapp-test/src/chat/usecase/send"
-	"research/kit/auth/jwt"
 
 	kitlog "github.com/go-kit/kit/log"
 	httptransport "github.com/go-kit/kit/transport/http"
@@ -21,8 +20,6 @@ func MakeHandler(
 	opts := []httptransport.ServerOption{
 		httptransport.ServerErrorLogger(logger),
 		httptransport.ServerErrorEncoder(encodeError),
-		httptransport.ServerBefore(jwt.HTTPToContext()),
-		httptransport.ServerBefore(jwt.ContextToHTTP()),
 	}
 
 	r := mux.NewRouter()
